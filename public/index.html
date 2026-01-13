@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Desenho Colaborativo</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #eee; }
+        .toolbar { background: #fff; padding: 10px; border-radius: 8px; margin: 10px; display: flex; gap: 10px; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .canvas-wrapper { position: relative; background: white; border: 1px solid #999; }
+        canvas { display: block; cursor: crosshair; }
+        .cursor { 
+            position: absolute; width: 10px; height: 10px; 
+            background: red; border-radius: 50%; border: 1px solid white;
+            pointer-events: none; z-index: 100; transition: transform 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <h3>Quadro Colaborativo</h3>
+    <div id="info">Sala: <span id="roomLabel">-</span> | Online: <span id="userCount">0</span></div>
+    
+    <div class="toolbar">
+        <input type="text" id="roomInput" placeholder="Cód. 6 dígitos" maxlength="6">
+        <button onclick="joinRoom()">Entrar</button>
+        <input type="color" id="colorPicker" value="#000000">
+        <button onclick="clearCanvas()" style="color: red;">Limpar Tudo</button>
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas id="canvas" width="800" height="500"></canvas>
+        <div id="cursors-layer"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
